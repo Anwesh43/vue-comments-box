@@ -1,0 +1,15 @@
+<body>
+    <div id = "app">
+        <input v-model = "currText" type = "text">
+        <button :disabled = "btnDisabled || disabled" @click = "add">Add</button>
+        <ul>
+           <li v-for = "comment of comments">
+              {{comment}}
+           </li>
+        </ul>
+    </div>
+    <script src = "vue.js">
+    </script>
+    <script src = "index.js">
+    </script>
+</body>
