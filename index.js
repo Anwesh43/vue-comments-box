@@ -16,6 +16,23 @@ Vue.component('CommentBox', {
     template : '<div :style = "objStyle">{{text}}</div>'
 })
 
+class Animator {
+
+    start(cb) {
+        if (!this.animated) {
+            this.animated = true
+            this.interval = setInterval(cb, 50)
+        }
+    }
+
+    stop() {
+        if (this.animated) {
+            this.animated = false
+            clearInterval(this.interval)
+        }
+    }
+}
+
 const app = new Vue({
     el : '#app',
     data : {
