@@ -1,3 +1,21 @@
+const w = window.innerWidth, h = window.innerHeight, sizeFactor = 10, textFactor = 20
+
+Vue.component('CommentBox', {
+    props : ['scale', 'text'],
+    data() {
+        const objStyle = {
+            width : `${(Math.min(w, h) * this.scale) / sizeFactor}px`,
+            height : `${(Math.min(w, h) * this.scale) / sizeFactor}px`,
+            background : '#3F51B5',
+            WebkitTransform : `rotate(${360 * this.scale}deg)`,
+            color : 'white',
+            fontSize : `${Math.min(w, h) / textFactor}`,
+            textAlign : 'center'
+        }
+    },
+    template : '<div :style = "objStyle">{{text}}</div>'
+})
+
 const app = new Vue({
     el : '#app',
     data : {
