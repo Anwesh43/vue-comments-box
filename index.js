@@ -1,4 +1,5 @@
 const w = window.innerWidth, h = window.innerHeight, sizeFactor = 10, textFactor = 20
+const scGap = 0.02
 
 Vue.component('CommentBox', {
     props : ['scale', 'text'],
@@ -29,6 +30,32 @@ class Animator {
         if (this.animated) {
             this.animated = false
             clearInterval(this.interval)
+        }
+    }
+}
+
+class State {
+
+    constructor() {
+        this.scale = 0
+        this.dir = 0
+        this.prevScale = 0
+    }
+
+    update(cb) {
+        this.scale += this.dir * scGap
+        if (Math.abs(this.scale - this.prevScale) > 1) {
+            this.scale = this.prevScale + this.dir
+            this.dir = 0
+            this.prevScale = this.scale
+            cb()
+        }
+    }
+
+    startUpdating(cb) {
+        if (this.dir == 0) {
+            this.dir = 1 - 2 * this.prevScale
+            cb()
         }
     }
 }
